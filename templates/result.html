@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}CleanSheet - Cleaning Results{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">Data Cleaning Completed</h3>
+            </div>
+            <div class="card-body">
+                <p>Your data has been successfully cleaned according to your specifications.</p>
+                
+                <!-- Summary of Applied Cleaning Steps -->
+                <div class="mb-4">
+                    <h4>Applied Cleaning Steps:</h4>
+                    <ol>
+                        {% for step in cleaning_steps %}
+                            <li><pre class="bg-light p-2 rounded"><code>{{ step }}</code></pre></li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                
+                <!-- Before and After Comparison -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Original Data (First 5 rows):</h4>
+                        {{ original_html|safe }}
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Cleaned Data (First 5 rows):</h4>
+                        {{ cleaned_html|safe }}
+                    </div>
+                </div>
+                
+                <!-- Download Options -->
+                <div class="mt-4">
+                    <h4>Download Options:</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cleaned CSV File</h5>
+                                    <p class="card-text">Download your cleaned data as a CSV file.</p>
+                                    <a href="{{ url_for('download_file', filename=cleaned_filename) }}" class="btn btn-primary">
+                                        Download CSV
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Python Cleaning Script</h5>
+                                    <p class="card-text">Download a Python script with all the cleaning steps.</p>
+                                    <a href="{{ url_for('download_file', filename=script_filename) }}" class="btn btn-primary">
+                                        Download Script
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="text-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                        Clean Another File
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

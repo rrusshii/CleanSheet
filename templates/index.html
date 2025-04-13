@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}CleanSheet - Upload CSV{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Upload CSV File</h3>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                    <div class="mb-4 text-center">
+                        <p class="lead">Start by uploading a CSV file for cleaning</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Choose CSV file</label>
+                        <input type="file" class="form-control" id="file" name="file" accept=".csv" required>
+                        <div class="form-text">Only CSV files are supported.</div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                            Upload and Preview
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <h5>About CleanSheet</h5>
+                <p>CleanSheet is a simple tool to clean and prepare your CSV data. You can:</p>
+                <ul>
+                    <li>Handle missing values (drop or fill)</li>
+                    <li>Convert column data types</li>
+                    <li>Rename columns</li>
+                    <li>Export cleaned data and get the Python code used for cleaning</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
